@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Micah Gold</title>
+<meta name="description" content="Micah Gold: GPU compilers, AI infrastructure, and algorithms. Papers and research.">
+<style>
+  :root { --bg: #fdfdfc; --fg: #1a1a1a; --muted: #5b5b5b; --rule: #e3e1dc; --link: #0b4fa8; --tag: #f1efe9; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #141414; --fg: #e9e7e2; --muted: #a3a09a; --rule: #2c2b29; --link: #7fb0ff; --tag: #222120; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+         font: 17px/1.6 Georgia, "Times New Roman", serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 56px 20px 80px; }
+  h1 { font-size: 2.1rem; margin: 0 0 4px; letter-spacing: 0.01em; }
+  .sub { color: var(--muted); margin: 0 0 14px; }
+  .links a { margin-right: 14px; }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  h2 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted);
+       border-bottom: 1px solid var(--rule); padding-bottom: 6px; margin: 44px 0 18px; font-family: system-ui, sans-serif; }
+  .paper { margin: 0 0 28px; }
+  .paper h3 { font-size: 1.12rem; margin: 0 0 2px; line-height: 1.35; }
+  .meta { color: var(--muted); font-size: 0.93rem; margin: 0 0 6px; }
+  .paper p { margin: 0 0 6px; }
+  .tags span { display: inline-block; background: var(--tag); border-radius: 4px; padding: 0 7px; margin: 0 6px 4px 0;
+               font: 0.78rem/1.7 system-ui, sans-serif; color: var(--muted); }
+  .pdf { font: 0.9rem system-ui, sans-serif; }
+  footer { margin-top: 56px; color: var(--muted); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Micah Gold</h1>
+  <p class="sub">GPU compiler engineer at NVIDIA. B.S./M.S. Computer Science, Yale (Summa Cum Laude, Phi Beta Kappa).<br>
+  I work on making AI workloads run faster, across compilers, GPU kernels, collective communication, and the theory underneath.</p>
+  <p class="links"><a href="mailto:micahcgold@gmail.com">micahcgold@gmail.com</a><a href="https://www.linkedin.com/in/micah-gold-896b33221/">LinkedIn</a><a href="https://github.com/MicahGold">GitHub</a></p>
+
+  <h2>Papers &amp; Research</h2>
+
+  <div class="paper">
+    <h3>Adversarial Configurations for the ReCom Transition Function</h3>
+    <p class="meta">Micah Gold &middot; arXiv:2606.01333 (cs.DS, cs.DM), 2026</p>
+    <p>ReCom is the leading Markov chain Monte Carlo method for sampling redistricting plans, and it is widely used to detect partisan gerrymandering. I construct explicit 3-partitions of planar grid graphs from which ReCom needs an exponentially large expected number of steps to re-split, even when approximately balanced splits are allowed. So ReCom is not polynomial-time in the worst case.</p>
+    <p class="tags"><span>Markov chains</span><span>spanning trees</span><span>computational redistricting</span></p>
+    <p class="pdf"><a href="https://arxiv.org/abs/2606.01333">arXiv</a> &middot; <a href="https://arxiv.org/pdf/2606.01333">PDF</a></p>
+  </div>
+
+  <div class="paper">
+    <h3>STARE: Packing Spanning Trees for GPU-GPU Communication</h3>
+    <p class="meta">Bill Qian, Micah Gold, Alex Schapiro &middot; Yale, 2026</p>
+    <p>An open-source reconstruction of Microsoft Blink&rsquo;s packed-spanning-tree collectives, built directly into NCCL&rsquo;s graph-construction and algorithm-selection path for both intra- and inter-node AllReduce. It uses multiplicative-weights tree packing with greedy refinement. On H200 systems, STARE reaches up to 2.61&times; AllReduce bus bandwidth on fragmented topologies and 1.18&times; across two 8&times;H200 nodes. It stays at parity on symmetric NVSwitch hardware.</p>
+    <p class="tags"><span>NCCL</span><span>collective communication</span><span>distributed training</span><span>H200</span></p>
+    <p class="pdf"><a href="papers/STARE-NCCL-Packed-Spanning-Trees.pdf">PDF</a></p>
+  </div>
+
+  <div class="paper">
+    <h3>Trie and Trie Again: The Quest to GPU Parallelize MDTRIE</h3>
+    <p class="meta">Micah Gold &middot; Senior Thesis, Yale (Advisor: Anurag Khandelwal), 2026</p>
+    <p>MDTRIE is a succinct multi-dimensional index (from TRINITY, EuroSys &rsquo;24) that offers a memory-light alternative to FAISS-style retrieval for RAG, but its range search is sequential. This thesis builds the first GPU implementation. A co-designed split-stream per-layer trie layout and a warp-scan kernel reach a 70&times; speedup over CPU, with per-query latency nearly flat in index size. The thesis also identifies the representational limits that remain at embedding-scale dimensionality.</p>
+    <p class="tags"><span>CUDA</span><span>succinct data structures</span><span>retrieval</span></p>
+    <p class="pdf"><a href="papers/MDTRIE-GPU-Thesis-Poster.pdf">Poster (PDF)</a></p>
+  </div>
+
+  <div class="paper">
+    <h3>Bayesian Telephone: Memory Consolidation and Recall as Generative Processes</h3>
+    <p class="meta">Dongyu Gong, Micah Gold &middot; Yale</p>
+    <p>Does the hippocampus store raw sensory input, or generative reconstructions of it? We model the hippocampus as a modern Hopfield network and the entorhinal cortex as a variational autoencoder. We compare a raw-observation pathway with a Bayesian inverse-graphics pathway on rendered scenes, and find that both support reliable generative recall from noisy cues.</p>
+    <p class="tags"><span>Hopfield networks</span><span>VAEs</span><span>probabilistic programming</span></p>
+    <p class="pdf"><a href="papers/Bayesian-Telephone-Generative-Memory.pdf">PDF</a></p>
+  </div>
+
+  <footer>Last updated October 2026.</footer>
+</main>
+</body>
+</html>
